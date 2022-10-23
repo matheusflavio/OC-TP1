@@ -11,13 +11,6 @@ add x13, x13, x12
 jal x1, inverte
 beq x0, x0, FIM
 
-##### A meu ver o main poderia ser reduzido assim #####
-#la x12, vetor # Carregando a posição inicial do vetor em x12
-#addi x13, x0, 24 # Alocando x13 como sendo 24 para armazenar a posição final do vetor
-#add x13, x13, x12 # Colocando x13 na posição final do vetor
-#E o fim do procedimento seria dado dentro da "função" inverte mesmo.
-#### Fim de comentário dando pitaco #####
-
 ##### START MODIFIQUE AQUI START #####
 inverte: 
 ##### Processo de troca de posição de x12 e x13 #####
@@ -44,4 +37,10 @@ FIM:
 	add x1, x0, x0 # Limpa x1 setando x1 = 0
 	add x8 ,x0, x0 # Limpa x8 setando x8 = 0
     add x9, x0, x0 # Limpa x9 setando x9 = 0
-    
+
+##### A meu ver o main poderia ser reduzido assim #####
+#la x12, vetor # Carregando a posição inicial do vetor em x12
+#addi x13, x0, 24 # Alocando x13 como sendo 24 para armazenar a posição final do vetor
+#add x13, x13, x12 # Colocando x13 na posição final do vetor
+#E o fim do procedimento seria dado dentro da "função" inverte mesmo.
+#### Fim de comentário dando pitaco #####
