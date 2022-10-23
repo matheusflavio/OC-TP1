@@ -33,7 +33,7 @@ verificacpf:
     jal x28, verificaDigito # Verifica se o segundo dígito do CPF está correto
     addi x10, x0, 1 # Seta x10 como sendo 1 para retorno caso os dígitos estejam corretos
     jalr x0, 0(x1)
-    
+
 verificacnpj:
     addi x13, x0, 6 # Seta x13 como sendo 5+1, para utilizar na soma do algoritmo de CNPJ 
     add x8, x0, x0 # Zera o valor de x8
@@ -56,7 +56,7 @@ verificadastro:
 	## Implmentação em que é passado direto ##
     #beq x0, x14, verificacpf
     #jal x28, verificacnpj
-    
+
     ## Implementação em que é alocado ao final do vetor original ##
     #slli x13, x13, 2
     #add x12, x12, x13
@@ -65,13 +65,13 @@ verificadastro:
     #srli x13, x13, 2
 	#beq x0, x14, verificacpf
     #jal x28, verificacnpj
-    
+        
     ## Implementação em que é alocado em um outro vetor ##
     #la x14, outrovetor
     #lw x15, 0(x14)
     #beq x0, x15, verificacpf
     #jal x28, verificacnpj
-    
+        
 	## Implementação em que não precisa da decisão, apenas analisa as dimensões ##
     addi x11, x0, 14
 	blt x13, x11, verificacpf
@@ -101,7 +101,7 @@ verificaDigito:
     sub x8, x11, x8 # x8 = 11 - resto
     bne x8, x5, retornaZero # Se o valor de x8 não for o valor que está no vetor, retorna 0 indicando que o vetor não é válido
     jalr x0, 0(x28)
-    
+        
 verificaZero:
 	bne x0, x5, retornaZero # Caso o algarismo não seja 0, retorna 0
     jalr x0, 0(x28)
@@ -109,6 +109,6 @@ verificaZero:
 retornaZero:
 	add x10, x0, x0 # Define retorno 0 como sendo CPF/CNPJ inválido
     jalr x0, 0(x1)
-    
+        
 ##### END MODIFIQUE AQUI END #####
 FIM: add x1, x0, x10
