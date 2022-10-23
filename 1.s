@@ -20,7 +20,7 @@ inverte:
     sw x9, 0(x12) # Armazena na posição x12 do vetor o valor da posição x13
 
 ##### Processo de incremento de x12 e decremento de x13. São dois "ponteiros" que andam em um direção ao outro #####
-	addi x12,x12,4 # x12 passa a ser o primeiro valor do vetor original que ainda não foi invertido
+    addi x12,x12,4 # x12 passa a ser o primeiro valor do vetor original que ainda não foi invertido
     addi x13,x13,-4 # x13 passa a ser o último valor do vetor original que ainda não foi invertido
     ble x13, x12, FIM_INVERTE # Caso x13 <= x12, termina o processo de inversão, pois não há nada mais a ser invertido
     addi sp, sp, 4 # Atualiza o sp para ser sp anterior + 4
@@ -30,11 +30,11 @@ inverte:
 FIM_INVERTE:
     lw x1, 0(sp) # Carrega em x1 o endereço armazenado anteriormente em sp
     addi sp, sp, -4 # Atualiza a posição do sp para sp - 4
-	jalr x0, 0(x1) 
+    jalr x0, 0(x1) 
 
 ##### END MODIFIQUE AQUI END #####
 FIM:
-	add x1, x0, x0
+    add x1, x0, x0
 
 ##### A meu ver o main poderia ser reduzido assim #####
 #la x12, vetor # Carregando a posição inicial do vetor em x12
