@@ -24,14 +24,11 @@ beq x0,x0,FIM
 
 verificacpf:
 	addi x13, x0, 11 # Seta x13 como sendo 10+1, para utilizar na soma do algoritmo de CPF 
-    addi x11, x0, 2 # Seta x11 como sendo 2, sendo esse o menor valor em que algum algarismo é multiplicado no algoritmo do CPF
     add x8, x0, x0	# Zera o valor de x8
     jal x28, somaDigitos # Soma os valores dos algarismos multipliados pelo dígito de posição
 	jal x28, verificaDigito # Verifica se o primeiro dígito do CPF está correto
-    la x12, vetor # Retoma o valor original de x12 como sendo o início do vetor
     add x8, x0, x0 # Zera o valor de x8
 	addi x13, x0, 12 # Seta x13 como sendo 11+1, para utilizar na soma do algoritmo de CPF 
-    addi x11, x0, 2 # Seta x11 como sendo 2, sendo esse o menor valor em que algum algarismo é multiplicado no algoritmo do CPF
     jal x28, somaDigitos # Soma os valores dos algarismos multipliados pelo dígito de posição
     jal x28, verificaDigito # Verifica se o segundo dígito do CPF está correto
     addi x10, x0, 1 # Seta x10 como sendo 1 para retorno caso os dígitos estejam corretos
@@ -40,16 +37,12 @@ verificacpf:
 verificacnpj:
     addi x13, x0, 6 # Seta x13 como sendo 5+1, para utilizar na soma do algoritmo de CNPJ 
     add x8, x0, x0 # Zera o valor de x8
-    addi x11, x0, 2 # Seta x11 como sendo 2, sendo esse o menor valor em que algum algarismo é multiplicado no algoritmo do CPF
     jal x28, somaDigitos # Soma os primeiros valores dos algarismos multipliados pelo dígito de posição
     addi x13, x0, 10 # Seta x13 como sendo 9+1, para utilizar na soma do algoritmo de CNPJ 
-    addi x11, x0, 2 # Seta x11 como sendo 2, sendo esse o menor valor em que algum algarismo é multiplicado no algoritmo do CPF
     jal x28, somaDigitos # Soma o restante dos valores dos algarismos multipliados pelo dígito de posição sem zerar x8 para armazenar a soma completa
     jal x28, verificaDigito # Verifica se o primeiro dígito do CNPJ está correto
-    la x12, vetor # Retoma o valor original de x12 como sendo o início do vetor
     addi x13, x0, 7 # Seta x13 como sendo 6+1, para utilizar na soma do algoritmo de CNPJ 
     add x8, x0, x0 # Zera o valor de x8
-    addi x11, x0, 2 # Seta x11 como sendo 2, sendo esse o menor valor em que algum algarismo é multiplicado no algoritmo do CPF
     jal x28, somaDigitos # Soma os primeiros valores dos algarismos multipliados pelo dígito de posição
     addi x13, x0, 10 # Seta x13 como sendo 9+1, para utilizar na soma do algoritmo de CNPJ 
     addi x11, x0, 2 # Seta x11 como sendo 2, sendo esse o menor valor em que algum algarismo é multiplicado no algoritmo do CPF
@@ -59,10 +52,10 @@ verificacnpj:
     jalr x0, 0(x1)
 
 verificadastro:
+###########################################################################################################################################################
 	## Implmentação em que é passado direto ##
     #beq x0, x14, verificacpf
     #jal x28, verificacnpj
-    
     
     ## Implementação em que é alocado ao final do vetor original ##
     #slli x13, x13, 2
@@ -83,8 +76,10 @@ verificadastro:
     addi x11, x0, 14
 	blt x13, x11, verificacpf
     jal x28, verificacnpj
+###########################################################################################################################################################
 
 somaDigitos:
+	addi x11, x0, 2 # Seta x11 como sendo 2, sendo esse o menor valor em que algum algarismo é multiplicado no algoritmo do CPF
 	lw x5, 0(x12) # x5 carregando o valor da memória do primeiro elemento do vetor
 	addi x13, x13, -1 # Reduz em uma unidade o valor de x13 para ser utilizado como multiplicação de posição
     mul x7, x5, x13 # Seta x7 como sendo dígito atual * valor da posição
@@ -100,6 +95,7 @@ verificaDigito:
     sub x8, x8, x7 # x8 passa a ser o resto de x8 - x7
     addi x11, x0, 2 # x11 passa a ser 2
   	lw x5, 0(x12) # Carrega o próximo elemento do vetor
+	la x12, vetor # Retoma o valor original de x12 como sendo o início do vetor
     blt x8, x11, verificaZero # Se x8 é menor que 2, verifica se ele é 0
     addi x11, x0, 11 # x11 passa a ser 11 para definir o valor do dígito
     sub x8, x11, x8 # x8 = 11 - resto
