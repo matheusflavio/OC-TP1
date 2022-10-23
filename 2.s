@@ -1,5 +1,5 @@
 .data
-vetor: .word 4 8 3 4 9 7 2 0 8 9 1
+vetor: .word 1 2 3 4 5 6 7 8 9 10 11
 .text
 main:
 la x12, vetor
@@ -11,7 +11,13 @@ verificacpf:
 	addi x13, x0, 11
 	add x14, x14, x13
     addi x11, x0, 2
-	beq x0, x0, verificaPrimeiroDigitoCPF
+	jal x28, verificaPrimeiroDigitoCPF
+    addi x12, x12, -36
+    add x8, x0, x0
+	add x14, x0, x13
+    addi x14, x14, 1
+    addi x11, x0, 2
+    jal x28, verificaSegundoDigitoCPF
     jalr x0, 0(x1)
 
 verificaPrimeiroDigitoCPF:
@@ -32,12 +38,7 @@ verificaPrimeiroDigitoCPF:
     addi x11, x0, 11
     sub x8, x11, x8
     bne x8, x5, retornaZero
-    addi x12, x12, -36
-    add x8, x0, x0
-	add x14, x0, x13
-    addi x14, x14, 1
-    addi x11, x0, 2
-    beq x0, x0, verificaSegundoDigitoCPF
+    jalr x0, 0(x28)
     
 verificaSegundoDigitoCPF:
 	lw x5, 0(x12) #x5 carregando o valor da memória do primeiro elemento do vetor
@@ -58,13 +59,14 @@ verificaSegundoDigitoCPF:
     sub x8, x11, x8
     bne x8, x5, retornaZero
     addi x10, x0, 1
-    jalr x0, 0(x1)
+    jalr x0, 0(x28)
     
 verificaZero:
 	bne x0, x5, retornaZero
+    jalr x0, 0(x28)
 
 verificacnpj:
-    addi sp, sp, -4
+    addi x13, x0, 14
     jalr x0, 0(x1)
     
 verificadastro:
