@@ -14,8 +14,8 @@ beq x0, x0, FIM
 ##### START MODIFIQUE AQUI START #####
 inverte: 
 ##### Processo de troca de posição de x12 e x13 #####
-    lw x8, 0(x12) # Carrega o endereço de x12 em x18
-    lw x9, 0(x13) # Carrega o endereço de x13 em x19
+    lw x8, 0(x12) # Carrega o endereço de x12 em x8
+    lw x9, 0(x13) # Carrega o endereço de x13 em x9
     sw x8, 0(x13) # Armazena na posição x13 do vetor o valor da posição x12
     sw x9, 0(x12) # Armazena na posição x12 do vetor o valor da posição x13
 
