@@ -4,36 +4,36 @@ vetor: .word 1 2 3 4 5 6 7 8 9 10 11
 main:
 la x12, vetor
 addi x13, x0, 11
-jal x1, verificadastro
+jal x1, verificacpf
 beq x0,x0,FIM
 ##### START MODIFIQUE AQUI START #####
 verificacpf:
-	addi x14, x0, 11
-    add x15, x0, x12
+	addi x13, x0, 11
+    add x12, x0, x12
     addi x11, x0, 2
 	jal x28, verificaDigitoCPF
-    add x15, x0, x12
+    la x12, vetor
     add x8, x0, x0
-	addi x14, x0, 12
+	addi x13, x0, 12
     addi x11, x0, 2
     jal x28, verificaDigitoCPF
     addi x10, x0, 1
     jalr x0, 0(x1)
 
 verificaDigitoCPF:
-	lw x5, 0(x15) #x5 carregando o valor da memória do primeiro elemento do vetor
-	addi x14, x14, -1
+	lw x5, 0(x12) #x5 carregando o valor da memória do primeiro elemento do vetor
+	addi x13, x13, -1
 	add x8, x8, x0
-    mul x7, x5, x14
+    mul x7, x5, x13
 	add x8, x8, x7 # Em x8 fica salvo os valores da soma do dígito * posição
-    addi x15, x15, 4
-    bgt x14, x11, verificaDigitoCPF
+    addi x12, x12, 4
+    bgt x13, x11, verificaDigitoCPF
     addi x11, x0, 11
     div x7, x8, x11 # x7 passa a ser o valor da divisao
     mul x7, x7, x11 # x7 passa a ser o valor da multiplicação para depois pegar o resto
     sub x8, x8, x7 # x8 passa  a ser o resto de x8 - x7
     addi x11, x0, 2
-  	lw x5, 0(x15)
+  	lw x5, 0(x12)
     blt x8, x11, verificaZero
     addi x11, x0, 11
     sub x8, x11, x8
