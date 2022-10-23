@@ -34,9 +34,7 @@ FIM_INVERTE:
 
 ##### END MODIFIQUE AQUI END #####
 FIM:
-	add x1, x0, x0 # Limpa x1 setando x1 = 0
-	add x8 ,x0, x0 # Limpa x8 setando x8 = 0
-    add x9, x0, x0 # Limpa x9 setando x9 = 0
+	add x1, x0, x0
 
 ##### A meu ver o main poderia ser reduzido assim #####
 #la x12, vetor # Carregando a posição inicial do vetor em x12
