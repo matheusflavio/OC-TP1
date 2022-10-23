@@ -1,5 +1,5 @@
 # Ignore zip files
 *.zip
 
-# Ignore txt files
-*.txt
+# Ignore aluno.txt file
+aluno.txt
