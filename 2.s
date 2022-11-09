@@ -53,7 +53,7 @@ verificacnpj:
 
 verificadastro:
 ###########################################################################################################################################################
-    ## Implmentação em que é passado direto ##
+    ## Implementação em que é passado direto ##
     #beq x0, x14, verificacpf
     #jal x28, verificacnpj
 
